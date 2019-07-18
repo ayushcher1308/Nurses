@@ -4,6 +4,21 @@
     /* background-color: DodgerBlue; */
   }
 
+  .data{
+    width: 100%;
+    height: 19px;
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    /* text-align: center; */
+  }
+
  .under-head{
      font-size: 12px;
      text-align: center;;
@@ -11,12 +26,24 @@
      font-family: 'Lato-Regular';
      color: #999999;
  } 
+
+
+
+ .checkbox{
+     width:30px;
+     height:30px;
+     margin-left: 10px;
+     float: left;
+     margin-top: 25px;
+ 
+ }
   
   .flex-container > div {
     background-color: #f1f1f1;
     width: 80%;
     margin: 10px 10% 10px 10%;
     text-align: center;
+    align-items: stretch;
     line-height: 80px;
     font-size: 30px;
     border-style:solid;
@@ -58,6 +85,16 @@
     margin-left:10%;
     margin-right: 10%;
     height: 40px;
+  }
+
+  .styled-date{
+    border-style:solid;
+    border-width:1.3px;
+    border-color: #d6e2ec;
+    margin-left:10%;
+    margin-right: 11%;
+    height: 40px;
+    margin-bottom: 10px;
   }
 
   .service-dur{

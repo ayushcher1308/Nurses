@@ -2,28 +2,31 @@
 <p class="under-head">Multiple services can be selected, and this is a dummy text</p>
 <div class="flex-container">
   <div *ngFor="let data of demo;let i=index">
-    <div class="upperDiv" (click)="toggleAccordion(i,$event)">{{data}}</div>
+    <div class="upperDiv" (click)="toggleAccordion(i,$event)">
+      <img class="checkbox" *ngIf="!accordionview[i]" src="../assets/group-6@3x.png" />
+      <img class="checkbox" *ngIf="accordionview[i]" src="../assets/group-10@3x.png" />
+      <span class="data">{{data}}</span>
+    </div>
     <div id="container">
-    <div  *ngIf="accordionview[i]">
-      <div class="flex-inner-container">
-        <div (click)="innerAccordion($event)">
-          <p class="service-dur">Service duration</p>
-          <div class="styled-select">
-            <!-- <img src="http://i62.tinypic.com/15xvbd5.png"/> -->
-          <select>
-            <option *ngFor="let duration of options">
-              {{duration}}
-            </option>
-          </select>
-        </div>
-          <p class="service-dur">Select Date and Time</p>
-          <div class="styled-select">
+      <div *ngIf="accordionview[i]" [@inOutAnimation]>
+        <div class="flex-inner-container">
+          <div (click)="innerAccordion($event)">
+            <p class="service-dur">Service duration</p>
+            <div class="styled-select">
+              <select>
+                <option *ngFor="let duration of options">
+                  {{duration}}
+                </option>
+              </select>
+            </div>
+            <p class="service-dur">Select Date and Time</p>
+            <div class="styled-date">
               <input type="datetime-local" class="datetime-local" name="bdaytime">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-  
-</div> 
+
+</div>

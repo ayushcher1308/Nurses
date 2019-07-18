@@ -1,10 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Console } from '@angular/core/src/console';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger(
+      'inOutAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ height: 0, opacity: 0 }),
+            animate('0.4s ease-out', 
+                    style({ height: 150, opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ height: 150, opacity: 1 }),
+            animate('0.4s ease-in', 
+                    style({ height: 0, opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
+  
 })
 export class AppComponent implements OnInit {
   title = 'Nurses Online';
@@ -15,7 +39,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.accordionview = [];
-    this.options = [];
+    this.options = [null];
     for (let i = 0; i < this.demo.length; i++) {
       this.accordionview.push(false);
     }
