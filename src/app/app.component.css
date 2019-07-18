@@ -1,0 +1,83 @@
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    /* background-color: DodgerBlue; */
+  }
+
+ .under-head{
+     font-size: 12px;
+     text-align: center;;
+     letter-spacing: 0.75px;
+     font-family: 'Lato-Regular';
+     color: #999999;
+ } 
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    width: 80%;
+    margin: 10px 10% 10px 10%;
+    text-align: center;
+    line-height: 80px;
+    font-size: 30px;
+    border-style:solid;
+    border-width:2px;
+    border-color: #d6e2ec;
+  }
+
+  .flex-inner-container > div {
+    background-color: #f1f1f1;
+    width: 100%;
+    /* margin: 10px 10% 10px 10%; */
+    text-align: center;
+    line-height: 3px !important;
+    font-size: 30px;
+    border-style:solid;
+    border-width:2px 0 0 0;
+    border-color: #d6e2ec;
+  }
+
+  .upperDiv{
+      width: 100%;
+      height: 100%;
+  }
+
+  select, .datetime-local{
+      width:100%;
+      height:40px;
+      font-size: 20px;
+      padding: 0 0 0 20px;
+      border-style: none;
+      background-color: white;
+      /* line-height: 45px; */
+  }
+
+  .styled-select{
+    border-style:solid;
+    border-width:1.3px;
+    border-color: #d6e2ec;
+    margin-left:10%;
+    margin-right: 10%;
+    height: 40px;
+  }
+
+  .service-dur{
+      font-size: 16px;
+      letter-spacing: 0.78px;
+       text-align: left !important; 
+      color:#1c1c1c !important;
+      font: 'SanFranciscoDisplay-Medium';
+      margin-left:10%;
+  }
+
+  .heading{
+      font-size: 22px;
+      text-align: center;
+      line-height: 20px;
+      letter-spacing: 3.61px;
+      color:#2c2e37;
+      font-family: 'Lato';
+  }
+
+  .service{
+      color:#28c328
+  }
