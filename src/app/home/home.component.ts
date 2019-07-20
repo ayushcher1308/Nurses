@@ -49,9 +49,11 @@ export class HomeComponent implements OnInit {
   accordionview;
   options;
   values;
+  servicesSelected;
 
   ngOnInit() {
     this.accordionview = [];
+    this.servicesSelected =[];
     this.options = [null];
     this.values = [];
     for (let i = 0; i < this.demo.length; i++) {
@@ -85,6 +87,15 @@ export class HomeComponent implements OnInit {
 
   continue()
   {
+    for(let i=0;i<this.values.length;i++)
+    {
+      if(this.values[i].select!='' && this.values[i].date != '')
+      {
+          this.servicesSelected.push(this.values[i]);
+      }
+    }
+    localStorage.setItem("services",JSON.stringify(this.servicesSelected));
+    console.log(this.servicesSelected);
     this.route.navigate(['caregiver']);
   }
 

@@ -22,7 +22,7 @@ h1{
 }  
 
 h2{
-  opacity: 0.3;
+  opacity: 0.6;
   font-family: Lato;
   font-size: 18px;
   font-weight: 500;
@@ -32,6 +32,11 @@ h2{
   letter-spacing: 1px;
   color: #1c1c1c;
   margin-left: 10px; 
+}
+
+.pay{
+  text-align: center;
+  margin-top: 20px;
 }
 
 .currency{
