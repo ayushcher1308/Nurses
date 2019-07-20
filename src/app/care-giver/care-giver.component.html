@@ -1,0 +1,20 @@
+<div class="main">
+    <h1><span style="color:black">Choose</span> Cargiver</h1>
+    <h2>This is a dummy text</h2>
+    <div class="grid-container">
+        <div class="grid-item" *ngFor="let doctor of doctor;let i=index" (click)="selectDoctor(i)" 
+        [ngStyle]="{'border-color':doctorSelected[i]?'#6ad969':'#d6e2ec'}">
+          <div class="type">{{doctor.type}}</div>
+          <div class="name">
+            <span>{{doctor.name}} </span>
+            <span>(<img class="star" src="../../assets/shape-copy-3@3x.png"/> 
+              <span class="rate"> {{doctor.rating}}</span>)</span>
+          </div>
+          <div class="degree"><span>{{doctor.degree}}-</span>
+          <span>{{doctor.medicine}}</span>
+        <span *ngIf="doctorSelected[i]" class="selected"><img src="../../assets/group-9@3x.png" style="height: 26px"/></span></div>
+          <div class="currency">{{doctor.fee | currency}}</div>
+        </div> 
+      </div>
+      <div class="continue"><button class="button" (click)="continue()">Book Caregiver</button></div>    
+</div>

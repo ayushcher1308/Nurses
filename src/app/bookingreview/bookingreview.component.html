@@ -1,0 +1,19 @@
+<h1><span style="color:black">Booking</span> Review</h1>
+<div class="cargiver">
+    <img (click)="edit('caregiver')" class="edit" src="../../assets/edit@3x.png"/>
+    <div><h2>Cargiver Selected ({{totalgiver}})
+        <span class="totalcost">{{totalcost | currency}}</span>
+    </h2></div>
+    <div *ngFor="let doctor of Caregiver" class="detail">
+            <div class="type">{{doctor.type}}</div>
+            <div class="name">
+              <span>{{doctor.name}} </span>
+              <span>(<img class="star" src="../../assets/shape-copy-3@3x.png"/> 
+                <span class="rate"> {{doctor.rating}}</span>)</span>
+            </div>
+            <div class="degree"><span>{{doctor.degree}}-</span>
+            <span>{{doctor.medicine}}</span>
+            <div class="currency">{{doctor.fee | currency}}</div>
+    </div>
+
+</div></div>

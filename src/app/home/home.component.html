@@ -1,0 +1,33 @@
+<h1 class="heading">Select your <span class="heading service">Service</span></h1>
+<p class="under-head">Multiple services can be selected, and this is a dummy text</p>
+<div class="flex-container">
+  <div *ngFor="let data of services;let i=index">
+    <div class="upperDiv" (click)="toggleAccordion(i,$event)" [ngStyle]="{'border-style':values[i].date != '' && values[i].select!='' && !accordionview[i]?'inherit':'hidden'}">
+      <img class="checkbox" *ngIf="values[i].select=='' || accordionview[i]" src="../assets/group-6@3x.png" />
+      <img class="checkbox"*ngIf="values[i].date != '' && values[i].select!='' && !accordionview[i]" src="../assets/group-10@3x.png" />
+      <span class="data">{{data}}</span>
+    </div>
+    <div id="container">
+      <div *ngIf="accordionview[i]" [@inOutAnimation]>
+        <div class="flex-inner-container">
+          <div >
+            <p class="service-dur">Service duration</p>
+            <div class="styled-select">
+              <select [(ngModel)]="values[i].select">
+                <option *ngFor="let duration of options">
+                  {{duration}}
+                </option>
+              </select>
+            </div>
+            <p class="service-dur">Select Date and Time</p>
+            <div class="styled-date">
+              <angular2-date-picker class="date-time" [settings]="settings" [(ngModel)]="values[i].date"></angular2-date-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="continue"><button class="button" (click)="continue()">Continue</button></div>
