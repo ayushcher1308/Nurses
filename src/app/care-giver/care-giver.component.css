@@ -21,7 +21,7 @@
 
   .type{
     font-family: Lato;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
@@ -29,6 +29,7 @@
     letter-spacing: normal;
     text-align: left;
     color: #28c328;
+    margin-left:10px;
   }
 
   .star{
@@ -48,6 +49,26 @@
     text-align: center;
     color: #28c328;
   }
+
+  ngx-carousel
+  {
+    margin-left: 10%;
+    width:80%;
+    /* height:22.85% !important; */
+  }
+
+  .leftRs{
+    position: absolute;
+    left: -75px;
+    top: 40px;
+  }
+
+  .rightRs{
+    position: absolute;
+    right: -25px;
+    top: 40px;
+  }
+
 
   h2{
     font-family: Lato;
@@ -71,6 +92,7 @@
     letter-spacing: normal;
     text-align: left;
     color: #1c1c1c;
+    /* margin-left:10px; */
   
   }
 
@@ -84,6 +106,7 @@
     letter-spacing: normal;
     text-align: left;
     color: #5e5e5e;
+    margin-left:10px;
   }
 
   .degree
@@ -97,6 +120,7 @@
     letter-spacing: normal;
     text-align: left;
     color: #5e5e5e;
+    margin-left:10px;
   }
 
   .name
@@ -111,15 +135,19 @@
     text-align: left;
     color: #1c1c1c;
     margin-top: 4px;
+    margin-left: 10px;  
   }
   
-  .grid-item {
+  ngx-item {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
-    border: solid 2px #d6e2ec;
-    background-color: #ffffff;
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+    border-style: solid;
+    border-color: #1c1c1c;
+    width:22.85% !important;
+    height:160px !important;
+    margin-right:10%
+    /* width:10%;
+    height:10%; */
+    /* margin-right: 30px; */
   }
 
   .continue{

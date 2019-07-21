@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxCarousel } from 'ngx-carousel';
+
 
 @Component({
   selector: 'app-care-giver',
@@ -63,12 +65,32 @@ export class CareGiverComponent implements OnInit {
 
   doctorSelected;
   finalSelection;
+  public carouselOne: NgxCarousel;
+
+  public myfunc(event: Event) {
+    // carouselLoad will trigger this funnction when your load value reaches
+    // it is helps to load the data by parts to increase the performance of the app
+    // must use feature to all carousel
+ }
 
   ngOnInit() {
     this.doctorSelected = [];
-    this.finalSelection = [];
-    if (localStorage.getItem("selectedDoc")) {
-      this.doctorSelected = JSON.parse(localStorage.getItem("selectedDoc"));
+    this.finalSelection = []; this.carouselOne = {
+      grid: {xs: 1, sm: 2, md:3, lg: 3, all: 0},
+      slide: 2,
+      speed: 400,
+      interval: 4000,
+      point: {
+        visible: true
+      },
+      load: 2,
+      touch: true,
+      loop: false,
+      custom: 'banner'
+    }
+
+    if (sessionStorage.getItem("selectedDoc")) {
+      this.doctorSelected = JSON.parse(sessionStorage.getItem("selectedDoc"));
     }
     else {
       for (let i = 0; i < this.doctor.length; i++) {
@@ -88,8 +110,9 @@ export class CareGiverComponent implements OnInit {
       }
     }
 
-    localStorage.setItem("doctor", JSON.stringify(this.finalSelection));
-    localStorage.setItem("selectedDoc", JSON.stringify(this.doctorSelected));
+    sessionStorage.setItem("doctor", JSON.stringify(this.finalSelection));
+    sessionStorage.setItem("selectedDoc", JSON.stringify(this.doctorSelected));
+    sessionStorage.setItem("demo",JSON.stringify(this.doctorSelected));
     this.route.navigate(['review'])
   }
 

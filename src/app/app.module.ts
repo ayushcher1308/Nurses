@@ -8,6 +8,8 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { CareGiverComponent } from './care-giver/care-giver.component';
 import { HomeComponent } from './home/home.component';
 import { BookingreviewComponent } from './bookingreview/bookingreview.component';
+import { NgxCarouselModule } from 'ngx-carousel';
+import 'hammerjs';
 
 
 
@@ -24,6 +26,7 @@ import { BookingreviewComponent } from './bookingreview/bookingreview.component'
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularDateTimePickerModule,
+    NgxCarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

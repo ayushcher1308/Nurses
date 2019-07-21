@@ -1,5 +1,12 @@
 <h1><span style="color:black">Booking</span> Review</h1>
 <div class="cargiver">
+        <img (click)="edit('home')" class="edit" src="../../assets/edit@3x.png"/>
+    <h2>services selected ({{totalServices}}) <span class="hours">Total Hours: {{totalHours}}</span></h2>
+    <div *ngFor="let service of servicesSelected">
+        <div class="service">{{service.service}}</div>
+    </div>
+</div>
+<div class="cargiver">
     <img (click)="edit('caregiver')" class="edit" src="../../assets/edit@3x.png"/>
     <div><h2>Cargiver Selected ({{totalgiver}})
         <span class="totalcost">{{totalcost | currency}}</span>

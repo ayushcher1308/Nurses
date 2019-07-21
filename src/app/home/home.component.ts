@@ -50,13 +50,25 @@ export class HomeComponent implements OnInit {
   options;
   values;
   servicesSelected;
+  
 
   ngOnInit() {
+
     this.accordionview = [];
     this.servicesSelected =[];
     this.options = [null];
     this.values = [];
-    for (let i = 0; i < this.demo.length; i++) {
+    if(sessionStorage.getItem("Accordion"))
+    {
+      this.accordionview = JSON.parse(sessionStorage.getItem("Accordion"));
+    }
+    if(sessionStorage.getItem("values"))
+    {
+      this.values = JSON.parse(sessionStorage.getItem("values"));
+    }
+    else
+    {
+      for (let i = 0; i < this.demo.length; i++) {
       this.accordionview.push(false);
       this.values.push(
         {
@@ -65,6 +77,7 @@ export class HomeComponent implements OnInit {
         }
       );
     }
+  }
     for(let j=0;j<15;j++)
     {
       this.options.push(j+1+" hours");
@@ -85,16 +98,29 @@ export class HomeComponent implements OnInit {
     // document.getElementById("container").style.transition = "visibility 0s linear 0.33s, opacity 0.33s linear;";
   }
 
+  unselect(index)
+  {
+    this.values[index].select = '';
+    window.event.stopPropagation();
+  }
+
   continue()
   {
     for(let i=0;i<this.values.length;i++)
     {
       if(this.values[i].select!='' && this.values[i].date != '')
       {
-          this.servicesSelected.push(this.values[i]);
+          this.servicesSelected.push({
+            select:this.values[i].select,
+            date:this.values[i].date,
+            service:this.services[i]
+          });
+
       }
     }
-    localStorage.setItem("services",JSON.stringify(this.servicesSelected));
+    sessionStorage.setItem("values",JSON.stringify(this.values));
+    sessionStorage.setItem("services",JSON.stringify(this.servicesSelected));
+    sessionStorage.setItem("Accordion",JSON.stringify(this.accordionview));
     console.log(this.servicesSelected);
     this.route.navigate(['caregiver']);
   }

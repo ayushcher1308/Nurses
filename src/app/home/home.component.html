@@ -3,9 +3,12 @@
 <div class="flex-container">
   <div *ngFor="let data of services;let i=index">
     <div class="upperDiv" (click)="toggleAccordion(i,$event)" [ngStyle]="{'border-style':values[i].date != '' && values[i].select!='' && !accordionview[i]?'inherit':'hidden'}">
-      <img class="checkbox" *ngIf="values[i].select=='' || accordionview[i]" src="../assets/group-6@3x.png" />
-      <img class="checkbox"*ngIf="values[i].date != '' && values[i].select!='' && !accordionview[i]" src="../assets/group-10@3x.png" />
-      <span class="data">{{data}}</span>
+      <img class="checkbox"  *ngIf="values[i].select=='' || accordionview[i]" src="../assets/group-6@3x.png" />
+      <img class="checkbox" (click)="unselect(i)" *ngIf="values[i].date != '' && values[i].select!='' && !accordionview[i]" src="../assets/group-10@3x.png" />
+      <span class="data" [ngStyle]="{'color':values[i].date != '' && values[i].select!='' && !accordionview[i]?'#28c328':'#000000'}">
+        <img src="../../assets/veterinarian@3x.png" *ngIf="values[i].select=='' || accordionview[i]" style="width: 21px;height: 20px;"/>
+        <img src="../../assets/stationary-bike@3x.png" *ngIf="values[i].date != '' && values[i].select!='' && !accordionview[i]" style="width: 21px;height: 20px;"/>
+          {{data}}</span>
     </div>
     <div id="container">
       <div *ngIf="accordionview[i]" [@inOutAnimation]>
