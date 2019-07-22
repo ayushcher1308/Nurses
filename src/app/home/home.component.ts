@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   options;
   values;
   servicesSelected;
+  compulsary:boolean = false;
   
 
   ngOnInit() {
@@ -101,6 +102,12 @@ export class HomeComponent implements OnInit {
   unselect(index)
   {
     this.values[index].select = '';
+    // this.values[index].date = '';
+    window.event.stopPropagation();
+  }
+
+  prevent()
+  {
     window.event.stopPropagation();
   }
 
@@ -115,14 +122,22 @@ export class HomeComponent implements OnInit {
             date:this.values[i].date,
             service:this.services[i]
           });
+          this.compulsary = true;
 
       }
     }
-    sessionStorage.setItem("values",JSON.stringify(this.values));
+    if(this.compulsary)
+    {
+      sessionStorage.setItem("values",JSON.stringify(this.values));
     sessionStorage.setItem("services",JSON.stringify(this.servicesSelected));
     sessionStorage.setItem("Accordion",JSON.stringify(this.accordionview));
     console.log(this.servicesSelected);
     this.route.navigate(['caregiver']);
+  }
+  else
+  {
+    alert("Please Select Service");
+  }
   }
 
 }

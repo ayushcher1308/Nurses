@@ -65,6 +65,7 @@ export class CareGiverComponent implements OnInit {
 
   doctorSelected;
   finalSelection;
+  compulsary:boolean = false;
   public carouselOne: NgxCarousel;
 
   public myfunc(event: Event) {
@@ -75,13 +76,14 @@ export class CareGiverComponent implements OnInit {
 
   ngOnInit() {
     this.doctorSelected = [];
-    this.finalSelection = []; this.carouselOne = {
+    this.finalSelection = []; 
+    this.carouselOne = {
       grid: {xs: 1, sm: 2, md:3, lg: 3, all: 0},
       slide: 2,
       speed: 400,
       interval: 4000,
       point: {
-        visible: true
+        visible: false
       },
       load: 2,
       touch: true,
@@ -106,14 +108,25 @@ export class CareGiverComponent implements OnInit {
   continue() {
     for (let i = 0; i < this.doctorSelected.length; i++) {
       if (this.doctorSelected[i]) {
-        this.finalSelection.push(this.doctor[i])
+        this.finalSelection.push(this.doctor[i]);
+        this.compulsary = true;
       }
     }
-
-    sessionStorage.setItem("doctor", JSON.stringify(this.finalSelection));
+    if(this.compulsary)
+    {
+      sessionStorage.setItem("doctor", JSON.stringify(this.finalSelection));
     sessionStorage.setItem("selectedDoc", JSON.stringify(this.doctorSelected));
     sessionStorage.setItem("demo",JSON.stringify(this.doctorSelected));
     this.route.navigate(['review'])
+  }
+  else{
+    alert("Please select Doctor");
+  }
+  }
+
+  back()
+  {
+    this.route.navigate(['home']);
   }
 
 }

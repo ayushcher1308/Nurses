@@ -49,7 +49,10 @@ export class BookingreviewComponent implements OnInit,AfterViewChecked {
         //Do something when payment is successful.
         alert("Transaction Completed");
       })
-    }
+    },
+    onCancel: () => {
+      alert("Payment Cancelled");
+    },
   };
 
   ngAfterViewChecked(): void {

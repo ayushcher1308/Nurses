@@ -21,8 +21,13 @@
       </div>
           <div class="currency">{{doctor.fee | currency}}</div>
           </ngx-item>
-          <button NgxCarouselPrev class='leftRs'>&lt;</button>
-          <button NgxCarouselNext class='rightRs'>&gt;</button>
+          <img NgxCarouselPrev class='leftRs' src="https://cdn0.iconfinder.com/data/icons/website-kit-2/512/icon_402-512.png"/>
+          <img NgxCarouselNext class='rightRs' src="https://image.flaticon.com/icons/svg/32/32213.svg"/>
+          <!-- <button NgxCarouselPrev class='leftRs'>&lt;</button> -->
+          <!-- <button NgxCarouselNext class='rightRs'>&gt;</button> -->
     </ngx-carousel>
 
-    <div class="continue"><button class="button" (click)="continue()">Book Caregiver</button></div>
+    <div class="continue">
+        <button class="button1" (click)="back()">Back</button>
+      <button class="button" (click)="continue()">Book Caregiver<img src="../../assets/arrow.png" style="height:15px;padding-left:5px;"></button>
+    </div>
