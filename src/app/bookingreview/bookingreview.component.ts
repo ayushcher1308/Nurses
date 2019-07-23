@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 declare let paypal: any;
+import SimpleCrypto from "simple-crypto-js";
 
 @Component({
   selector: 'app-bookingreview',
@@ -19,6 +20,8 @@ export class BookingreviewComponent implements OnInit,AfterViewChecked {
   finalAmount: number = 1;
   totalHours=0;
   totalServices;
+  _secretKey = "some-unique-key";
+  simpleCrypto = new SimpleCrypto(this._secretKey);
 
   paypalConfig = {
     env: 'sandbox',
@@ -78,13 +81,38 @@ export class BookingreviewComponent implements OnInit,AfterViewChecked {
   ngOnInit() {
     if(sessionStorage.getItem("doctor"))
     {
-        this.Caregiver = JSON.parse(sessionStorage.getItem("doctor"));
+        // this.Caregiver = JSON.parse(sessionStorage.getItem("doctor"));
+        let data =JSON.parse(sessionStorage.getItem("doctor"));
+        let finalData = [];
+        console.log(data);
+        
+        for(let i=0;i<data.length;i++)
+        {
+          finalData.push({degree: this.simpleCrypto.decrypt(data[i].degree),
+            fee: this.simpleCrypto.decrypt(data[i].fee),
+            medicine: this.simpleCrypto.decrypt(data[i].medicine),
+            name: this.simpleCrypto.decrypt(data[i].name),
+            rating: this.simpleCrypto.decrypt(data[i].rating),
+            type: this.simpleCrypto.decrypt(data[i].type)})
+        }
+        this.Caregiver = finalData;
         console.log(this.Caregiver)
     }
 
     if(sessionStorage.getItem("services"))
     {
-        this.servicesSelected = JSON.parse(sessionStorage.getItem("services"));
+        let data =JSON.parse(sessionStorage.getItem("services"));
+        let finalData = [];
+        for(let i=0;i<data.length;i++)
+        {
+          finalData.push({
+            select:this.simpleCrypto.decrypt(data[i].select),
+            date:this.simpleCrypto.decrypt(data[i].date),
+            service:this.simpleCrypto.decrypt(data[i].service)
+          })
+        }
+
+        this.servicesSelected = finalData;
     }
     this.totalgiver = this.Caregiver.length;
     console.log(this.Caregiver);

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxCarousel } from 'ngx-carousel';
+import SimpleCrypto from "simple-crypto-js";
+
 
 
 @Component({
@@ -65,20 +67,24 @@ export class CareGiverComponent implements OnInit {
 
   doctorSelected;
   finalSelection;
-  compulsary:boolean = false;
+  compulsary: boolean = false;
   public carouselOne: NgxCarousel;
+  _secretKey = "some-unique-key";
+  simpleCrypto = new SimpleCrypto(this._secretKey);
+  finalSel;
 
   public myfunc(event: Event) {
     // carouselLoad will trigger this funnction when your load value reaches
     // it is helps to load the data by parts to increase the performance of the app
     // must use feature to all carousel
- }
+  }
 
   ngOnInit() {
     this.doctorSelected = [];
-    this.finalSelection = []; 
+    this.finalSel = [];
+    this.finalSelection = [];
     this.carouselOne = {
-      grid: {xs: 1, sm: 2, md:3, lg: 3, all: 0},
+      grid: { xs: 1, sm: 2, md: 3, lg: 3, all: 0 },
       slide: 2,
       speed: 400,
       interval: 4000,
@@ -112,20 +118,31 @@ export class CareGiverComponent implements OnInit {
         this.compulsary = true;
       }
     }
-    if(this.compulsary)
-    {
-      sessionStorage.setItem("doctor", JSON.stringify(this.finalSelection));
-    sessionStorage.setItem("selectedDoc", JSON.stringify(this.doctorSelected));
-    sessionStorage.setItem("demo",JSON.stringify(this.doctorSelected));
-    this.route.navigate(['review'])
-  }
-  else{
-    alert("Please select Doctor");
-  }
+
+    if (this.compulsary) {
+      for (let i = 0; i < this.finalSelection.length; i++) {
+        // console.log(this.finalSelection[i].degree);
+        this.finalSel.push({
+          degree: this.simpleCrypto.encrypt(this.finalSelection[i].degree),
+          fee: this.simpleCrypto.encrypt(this.finalSelection[i].fee),
+          medicine: this.simpleCrypto.encrypt(this.finalSelection[i].medicine),
+          name: this.simpleCrypto.encrypt(this.finalSelection[i].name),
+          rating: this.simpleCrypto.encrypt(this.finalSelection[i].rating),
+          type: this.simpleCrypto.encrypt(this.finalSelection[i].type)
+        })
+      }
+      console.log(this.finalSel);
+      sessionStorage.setItem("doctor", JSON.stringify(this.finalSel));
+      sessionStorage.setItem("selectedDoc", JSON.stringify(this.doctorSelected));
+      sessionStorage.setItem("demo", JSON.stringify(this.doctorSelected));
+      this.route.navigate(['review'])
+    }
+    else {
+      alert("Please select Doctor");
+    }
   }
 
-  back()
-  {
+  back() {
     this.route.navigate(['home']);
   }
 

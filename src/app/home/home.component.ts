@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
+import SimpleCrypto from "simple-crypto-js";
+
 
 @Component({
   selector: 'app-home',
@@ -51,6 +53,8 @@ export class HomeComponent implements OnInit {
   values;
   servicesSelected;
   compulsary:boolean = false;
+   _secretKey = "some-unique-key";
+    simpleCrypto = new SimpleCrypto(this._secretKey);
   
 
   ngOnInit() {
@@ -65,7 +69,17 @@ export class HomeComponent implements OnInit {
     }
     if(sessionStorage.getItem("values"))
     {
-      this.values = JSON.parse(sessionStorage.getItem("values"));
+      let data = JSON.parse(sessionStorage.getItem("values"));
+      let finalData = [];
+      for(let j=0;j<data.length;j++)
+      {
+        finalData.push({
+          date:this.simpleCrypto.decrypt(data[j].date),
+          select:this.simpleCrypto.decrypt(data[j].select)
+        })
+      }
+      this.values = finalData;
+      console.log(this.values);
     }
     else
     {
@@ -118,9 +132,9 @@ export class HomeComponent implements OnInit {
       if(this.values[i].select!='' && this.values[i].date != '')
       {
           this.servicesSelected.push({
-            select:this.values[i].select,
-            date:this.values[i].date,
-            service:this.services[i]
+            select:this.simpleCrypto.encrypt(this.values[i].select),
+            date:this.simpleCrypto.encrypt(this.values[i].date),
+            service:this.simpleCrypto.encrypt(this.services[i])
           });
           this.compulsary = true;
 
@@ -128,7 +142,15 @@ export class HomeComponent implements OnInit {
     }
     if(this.compulsary)
     {
-      sessionStorage.setItem("values",JSON.stringify(this.values));
+      let finalVal=[]
+      for(let i=0;i<this.values.length;i++)
+      {
+        finalVal.push({
+          date:this.simpleCrypto.encrypt(this.values[i].date),
+          select:this.simpleCrypto.encrypt(this.values[i].select)
+        })
+      }
+      sessionStorage.setItem("values",JSON.stringify(finalVal));
     sessionStorage.setItem("services",JSON.stringify(this.servicesSelected));
     sessionStorage.setItem("Accordion",JSON.stringify(this.accordionview));
     console.log(this.servicesSelected);
